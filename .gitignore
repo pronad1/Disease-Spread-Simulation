@@ -1,0 +1,35 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.env
+*.egg-info/
+dist/
+build/
+
+# Data (large files)
+data/raw/*.csv
+data/processed/*.csv
+data/shapefiles/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# IDE
+.vscode/settings.json
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Streamlit
+.streamlit/secrets.toml
+
+# Reports (generated)
+report/figures/*.png
+report/figures/*.pdf
