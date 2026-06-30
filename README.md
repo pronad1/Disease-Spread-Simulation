@@ -66,40 +66,7 @@ pytest tests/ -v --tb=short
 
 ---
 
-## Project Structure
-
-```
-Disease-Spread-Simulation/
-├── core/
-│   ├── seir_model.py        # SEIRD ODE model + disease presets + interventions
-│   ├── abm_model.py         # Agent-based model (NetworkX Barabási-Albert)
-│   ├── monte_carlo.py       # Monte Carlo uncertainty analysis
-│   └── age_stratified.py    # Age-stratified 3-cohort SEIRD (15 ODEs)
-├── ui/
-│   ├── app.py               # Main Streamlit dashboard (8 tabs)
-│   └── components/
-│       ├── charts.py        # All Plotly chart builders
-│       ├── metrics.py       # Metric cards + herd immunity progress
-│       └── geo_map.py       # Bangladesh geographic heatmap
-├── data/
-│   ├── presets.json         # Disease parameter presets (COVID, Flu, Measles, Dengue)
-│   ├── raw/                 # WHO / Our World in Data CSVs
-│   └── processed/           # Cleaned validation data
-├── tests/
-│   ├── test_seir.py         # SEIRD model unit tests (6 test classes)
-│   └── test_abm.py          # ABM unit tests
-├── report/
-│   └── figures/             # Generated charts for IEEE report
-├── requirements.txt
-├── .gitignore
-└── README.md
-```
-
----
-
-## The Mathematics
-
-### SEIRD Differential Equations
+## SEIRD Differential Equations
 
 $$\frac{dS}{dt} = -\frac{\beta S I}{N} - \nu S$$
 
