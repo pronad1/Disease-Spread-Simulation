@@ -137,5 +137,3 @@ The model was validated by comparing the SEIRD curve shape against Bangladesh CO
 7. IEDCR Bangladesh. https://www.iedcr.gov.bd
 
 ---
-
-*Built as part of an epidemiological modelling research project — Bangladesh context, June 2026.*
