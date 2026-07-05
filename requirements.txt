@@ -3,3 +3,5 @@ scipy>=1.11
 streamlit>=1.35
 pandas>=2.2
 pytest>=8.0
+plotly>=5.20
+kaleido>=0.2
