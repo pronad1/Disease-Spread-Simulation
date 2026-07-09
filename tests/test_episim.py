@@ -1,3 +1,12 @@
+import sys
+from pathlib import Path
+
+# Allow running this file directly: python tests/test_episim.py
+# conftest.py handles the sys.path for pytest runs
+_ROOT = Path(__file__).resolve().parent.parent
+if str(_ROOT) not in sys.path:
+    sys.path.insert(0, str(_ROOT))
+
 import numpy as np
 
 from episim import run_scenario, simulate_seir
