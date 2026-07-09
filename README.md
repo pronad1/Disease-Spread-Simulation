@@ -60,30 +60,15 @@ python -m venv .venv
 .\.venv\Scripts\Activate.ps1
 ```
 
-### 2. Install dependencies
+### 2. Run the dashboard
 
 ```powershell
-pip install -r requirements.txt
-```
-
-### 3. Run the dashboard
-
-```powershell
-streamlit run ui\app.py
-```
-
-Then open the local URL shown by Streamlit in your browser.
-
-### 4. Run tests
-
-```powershell
-pytest -q
+.\run.bat
 ```
 
 ## Current status
 
 The project is already set up and working with:
-
 - a working SEIR simulation engine
 - an interactive dashboard
 - passing tests
