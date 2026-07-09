@@ -96,6 +96,7 @@ This project is suitable for a simulation sessional or coursework submission bec
 - parameter-based scenario analysis
 - public health intervention comparison
 - a practical Python implementation with visualization
+<<<<<<< HEAD
 
 ## Future improvements
 
@@ -106,3 +107,5 @@ Possible extensions include:
 - adding charts for peak infection and total cases
 - exporting results as CSV or image
 - adding a more advanced intervention timeline
+=======
+>>>>>>> 7a84472210e318b8d07308a8077a6b296b4c6bc1
