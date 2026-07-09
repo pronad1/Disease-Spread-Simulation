@@ -869,6 +869,91 @@ def build_fig(
     return fig
 
 
+def build_comparison_fig(
+    bl_df: pd.DataFrame,
+    sc_df: pd.DataFrame,
+    icu_line: int,
+    model_type: str = "SEIRD",
+) -> go.Figure:
+    fig = go.Figure()
+
+    # 1. Baseline Infectious Curve (Dashed red/coral)
+    fig.add_trace(go.Scatter(
+        x=bl_df["Day"], y=bl_df["Infectious"],
+        name="Baseline Infections (No Intervention)",
+        mode="lines",
+        line=dict(color="#FC8181", width=2.5, dash="dash"),
+        hovertemplate="<b>Baseline Infected</b>: %{y:,.0f}<br>Day %{x:.0f}<extra></extra>",
+    ))
+
+    # 2. Intervention Infectious Curve (Solid glowing emerald/green with fill)
+    fig.add_trace(go.Scatter(
+        x=sc_df["Day"], y=sc_df["Infectious"],
+        name="Intervention Infections (Flattened Curve)",
+        mode="lines",
+        fill="tozeroy",
+        fillcolor="rgba(104,211,145,0.12)",
+        line=dict(color="#68D391", width=3.0),
+        hovertemplate="<b>Intervention Infected</b>: %{y:,.0f}<br>Day %{x:.0f}<extra></extra>",
+    ))
+
+    # 3. Hospitalisation comparison
+    fig.add_trace(go.Scatter(
+        x=sc_df["Day"], y=sc_df["Hospitalised"],
+        name="Intervention Hospitalised",
+        mode="lines",
+        line=dict(color="#F6AD55", width=1.8, dash="dot"),
+        hovertemplate="<b>Intervention Hosp.</b>: %{y:,.0f}<br>Day %{x:.0f}<extra></extra>",
+    ))
+
+    # 4. ICU capacity threshold
+    fig.add_hline(
+        y=icu_line,
+        line_color="rgba(252,129,129,0.65)",
+        line_dash="dash",
+        line_width=1.5,
+        annotation_text=f"⚠ ICU Bed Capacity ({icu_line:,})",
+        annotation_position="top right",
+        annotation_font_color="rgba(252,129,129,0.9)",
+        annotation_font_size=11,
+    )
+
+    fig.update_layout(
+        paper_bgcolor="rgba(0,0,0,0)",
+        plot_bgcolor="rgba(0,0,0,0)",
+        font=dict(family="Inter", color="rgba(180,210,255,0.75)"),
+        height=450,
+        margin=dict(l=50, r=30, t=30, b=50),
+        legend=dict(
+            orientation="h",
+            yanchor="bottom", y=1.02,
+            xanchor="right",  x=1,
+            font=dict(size=11),
+            bgcolor="rgba(0,0,0,0)",
+        ),
+        hovermode="x unified",
+        hoverlabel=dict(
+            bgcolor="rgba(10,15,35,0.95)",
+            bordercolor="rgba(99,179,237,0.3)",
+            font_family="Inter",
+            font_size=12,
+        ),
+        xaxis=dict(
+            title="Day", showgrid=True,
+            gridcolor="rgba(255,255,255,0.04)",
+            zeroline=False,
+            tickfont=dict(size=11),
+        ),
+        yaxis=dict(
+            title="Active Infections / Hospitalised", showgrid=True,
+            gridcolor="rgba(255,255,255,0.04)",
+            zeroline=False,
+            tickfont=dict(size=11),
+        ),
+    )
+    return fig
+
+
 def run_mc(n_runs: int) -> dict | None:
     if n_runs <= 0:
         return None
