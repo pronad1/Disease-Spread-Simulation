@@ -59,9 +59,11 @@ def simulate_seird(
     initial_infected: int,
     days: int,
     initial_recovered: int = 0,
+    model_type: str = "SEIRD",
 ) -> Tuple[np.ndarray, np.ndarray]:
-    """Solve the SEIRD ODE system and return (times, states).
+    """Solve the epidemic ODE system and return (times, states).
 
+    Supports model_type: 'SEIRD', 'SEIR', 'SIR', 'SIS'.
     states columns: [Susceptible, Exposed, Infectious, Recovered, Dead]
     """
     if population <= 0:
@@ -85,19 +87,41 @@ def simulate_seird(
     D0 = 0.0
 
     initial_state = [S0, E0, I0, R0_val, D0]
+    model_upper = model_type.upper().split(" ")[0]
 
-    def seird_system(state, _t):
+    def epidemic_system(state, _t):
         S, E, I, R, D = state
-        N = population  # keep N constant (closed population)
+        N = population
         infection_rate = beta * S * I / N
-        dS = -infection_rate
-        dE =  infection_rate - sigma * E
-        dI =  sigma * E - (gamma + mu) * I
-        dR =  gamma * I
-        dD =  mu * I
+
+        if model_upper == "SEIR":
+            dS = -infection_rate
+            dE = infection_rate - sigma * E
+            dI = sigma * E - gamma * I
+            dR = gamma * I
+            dD = 0.0
+        elif model_upper == "SIR":
+            dS = -infection_rate
+            dE = 0.0
+            dI = infection_rate - gamma * I
+            dR = gamma * I
+            dD = 0.0
+        elif model_upper == "SIS":
+            dS = -infection_rate + gamma * I
+            dE = 0.0
+            dI = infection_rate - gamma * I
+            dR = 0.0
+            dD = 0.0
+        else:  # Default SEIRD
+            dS = -infection_rate
+            dE = infection_rate - sigma * E
+            dI = sigma * E - (gamma + mu) * I
+            dR = gamma * I
+            dD = mu * I
+
         return [dS, dE, dI, dR, dD]
 
-    solution = odeint(seird_system, initial_state, times)
+    solution = odeint(epidemic_system, initial_state, times)
     return times, solution
 
 
@@ -147,9 +171,10 @@ def run_scenario(
     vaccine_coverage: float = 0.0,
     distancing_reduction: float = 0.0,
     hospitalization_rate: float = 0.05,
+    model_type: str = "SEIRD",
 ) -> Dict:
-    """Run one SEIRD scenario with optional vaccination, distancing, and
-    case fatality / hospitalization rates.
+    """Run one epidemic scenario with optional vaccination, distancing, and
+    case fatality / hospitalization rates across any supported model structure.
 
     Returns a dict with times, states, and summary statistics.
     """
@@ -165,6 +190,7 @@ def run_scenario(
         initial_infected=initial_infected,
         days=days,
         initial_recovered=vaccinated,
+        model_type=model_type,
     )
 
     S, E, I, R, D = states.T
@@ -187,6 +213,7 @@ def run_scenario(
         "total_deaths": total_deaths,
         "peak_hospitalized": peak_hospitalized,
         "r0": r0,
+        "model_type": model_type,
     }
 
 

@@ -57,3 +57,24 @@ def test_intervention_reduces_peak_infections():
 
     assert intervention["peak_infected"] < baseline["peak_infected"]
     assert intervention["final_recovered"] < baseline["final_recovered"]
+
+
+def test_all_epidemic_models():
+    for m in ["SEIRD", "SEIR", "SIR", "SIS"]:
+        res = run_scenario(
+            population=1000,
+            beta=0.3,
+            sigma=0.2,
+            gamma=0.1,
+            mu=0.01,
+            initial_infected=10,
+            days=30,
+            model_type=m,
+        )
+        assert res["states"].shape[0] == 31
+        assert "times" in res
+        assert "r0" in res
+        assert "peak_infected" in res
+        # Check conservation of total population
+        total_pop = np.sum(res["states"], axis=1)
+        assert np.allclose(total_pop, 1000)
