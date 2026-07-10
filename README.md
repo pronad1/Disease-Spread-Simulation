@@ -16,14 +16,6 @@ A simple Python-based epidemic modeling project for academic use. The project im
   - distancing reduction
 - Basic automated tests with pytest
 
-## Project structure
-
-- [episim.py](episim.py) — core simulation logic
-- [ui/app.py](ui/app.py) — interactive dashboard
-- [tests/test_episim.py](tests/test_episim.py) — test cases
-- [requirements.txt](requirements.txt) — Python dependencies
-- [description.ipynb](description.ipynb) — initial notebook idea and project description
-
 ## Model overview
 
 The simulation uses the SEIR framework:
