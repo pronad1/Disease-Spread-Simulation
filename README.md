@@ -66,13 +66,6 @@ python -m venv .venv
 .\run.bat
 ```
 
-## Current status
-
-The project is already set up and working with:
-- a working SEIR simulation engine
-- an interactive dashboard
-- passing tests
-
 ## Academic use note
 
 This project is suitable for a simulation sessional or coursework submission because it demonstrates:
