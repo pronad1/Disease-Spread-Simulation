@@ -429,89 +429,73 @@ components.html("""
 </script>
 """, height=0)
 
-
 # ---------------------------------------------------------------------------
-# Background particle animation — pure CSS, no JS, no iframe restrictions
+# ---------------------------------------------------------------------------
+# ---------------------------------------------------------------------------
+# High-Class Helical/Zigzag Slow-Motion Constellation Network (NeuroVision AI Style)
+# 100% Pure CSS inside <style> tags (Guaranteed zero text or HTML leaked onto screen)
 # ---------------------------------------------------------------------------
 st.markdown("""
 <style>
-/* ── Floating particle keyframes ───────────────────────────── */
-@keyframes ep-rise {
-    0%   { transform: translateY(105vh) scale(0.4) rotate(0deg); opacity: 0; }
-    8%   { opacity: 1; }
-    92%  { opacity: 0.75; }
-    100% { transform: translateY(-12vh) scale(1) rotate(45deg); opacity: 0; }
-}
-@keyframes ep-sway {
-    0%   { margin-left: 0px; }
-    20%  { margin-left: 40px; }
-    40%  { margin-left: -25px; }
-    60%  { margin-left: 55px; }
-    80%  { margin-left: -35px; }
-    100% { margin-left: 0px; }
-}
-@keyframes ep-pulse-orb {
-    0%,100% { box-shadow: 0 0 6px 2px var(--ep-c); opacity: 0.55; }
-    50%      { box-shadow: 0 0 18px 6px var(--ep-c); opacity: 0.95; }
+/* Pure scientific obsidian navy background (zero white haze or glare) */
+.stApp {
+    position: relative !important;
+    background-color: #040812 !important;
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.018) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.018) 1px, transparent 1px) !important;
+    background-size: 44px 44px, 44px 44px !important;
+    min-height: 100vh !important;
 }
 
-/* ── Base particle style ────────────────────────────────────── */
-.ep-p {
-    position: fixed;
-    bottom: -60px;
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 0;
-    animation:
-        ep-rise  var(--ep-dur,  24s) var(--ep-del,  0s) linear    infinite,
-        ep-sway  var(--ep-sw,   12s) var(--ep-del,  0s) ease-in-out infinite,
-        ep-pulse-orb 3s              var(--ep-del,  0s) ease-in-out infinite;
-    width:  var(--ep-sz, 6px);
-    height: var(--ep-sz, 6px);
-    left:   var(--ep-x,  50%);
-    background: var(--ep-c, rgba(99,179,237,0.7));
-    filter: blur(var(--ep-blur, 0.5px));
+/* Ensure foreground content floats clearly above background animation */
+.main .block-container {
+    position: relative !important;
+    z-index: 2 !important;
+}
+
+/* Slow-Motion Helical & Zigzag Trajectories (Slightly increased movement & range) */
+@keyframes helicalSlowDrift1 {
+    0%   { transform: translate(0px, 0px); }
+    25%  { transform: translate(65px, -38px); }
+    50%  { transform: translate(25px, -75px); }
+    75%  { transform: translate(-50px, -45px); }
+    100% { transform: translate(0px, 0px); }
+}
+
+@keyframes helicalSlowDrift2 {
+    0%   { transform: translate(0px, 0px); }
+    33%  { transform: translate(-70px, 45px); }
+    66%  { transform: translate(45px, 68px); }
+    100% { transform: translate(0px, 0px); }
+}
+
+/* Helical Constellation Layer 1: Open 2-, 3-, and 4-Node Freely Connected Chains */
+.stApp::before {
+    content: "" !important;
+    position: fixed !important;
+    top: 0 !important; left: 0 !important;
+    width: 100vw !important; height: 100vh !important;
+    pointer-events: none !important;
+    z-index: 0 !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 700'%3E%3Cg stroke='rgba(0, 240, 255, 0.32)' stroke-width='0.75'%3E%3Cline x1='150' y1='150' x2='230' y2='195'/%3E%3Cline x1='230' y1='195' x2='290' y2='145'/%3E%3Cline x1='510' y1='135' x2='590' y2='165'/%3E%3Cline x1='590' y1='165' x2='660' y2='235'/%3E%3Cline x1='660' y1='235' x2='730' y2='190'/%3E%3Cline x1='260' y1='475' x2='360' y2='535'/%3E%3Cline x1='720' y1='470' x2='810' y2='515'/%3E%3Cline x1='810' y1='515' x2='870' y2='445'/%3E%3C/g%3E%3Cg fill='%2300f0ff'%3E%3Ccircle cx='150' cy='150' r='1.3'/%3E%3Ccircle cx='230' cy='195' r='1.3'/%3E%3Ccircle cx='290' cy='145' r='1.3'/%3E%3Ccircle cx='510' cy='135' r='1.3'/%3E%3Ccircle cx='590' cy='165' r='1.3'/%3E%3Ccircle cx='660' cy='235' r='1.3'/%3E%3Ccircle cx='730' cy='190' r='1.3'/%3E%3Ccircle cx='260' cy='475' r='1.3'/%3E%3Ccircle cx='360' cy='535' r='1.3'/%3E%3Ccircle cx='720' cy='470' r='1.3'/%3E%3Ccircle cx='810' cy='515' r='1.3'/%3E%3Ccircle cx='870' cy='445' r='1.3'/%3E%3C/g%3E%3C/svg%3E");
+    background-size: 100% 100% !important;
+    animation: helicalSlowDrift1 16s ease-in-out infinite !important;
+}
+
+/* Helical Constellation Layer 2: Open 3- and 4-Node Freely Connected Chains */
+.stApp::after {
+    content: "" !important;
+    position: fixed !important;
+    top: 0 !important; left: 0 !important;
+    width: 100vw !important; height: 100vh !important;
+    pointer-events: none !important;
+    z-index: 0 !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 700'%3E%3Cg stroke='rgba(6, 182, 212, 0.32)' stroke-width='0.75'%3E%3Cline x1='250' y1='175' x2='340' y2='210'/%3E%3Cline x1='340' y1='210' x2='420' y2='155'/%3E%3Cline x1='420' y1='155' x2='490' y2='190'/%3E%3Cline x1='680' y1='215' x2='760' y2='285'/%3E%3Cline x1='760' y1='285' x2='840' y2='250'/%3E%3Cline x1='120' y1='475' x2='200' y2='520'/%3E%3Cline x1='200' y1='520' x2='270' y2='445'/%3E%3Cline x1='270' y1='445' x2='350' y2='480'/%3E%3Cline x1='510' y1='475' x2='595' y2='510'/%3E%3Cline x1='595' y1='510' x2='670' y2='445'/%3E%3C/g%3E%3Cg fill='%2306b6d4'%3E%3Ccircle cx='250' cy='175' r='1.3'/%3E%3Ccircle cx='340' cy='210' r='1.3'/%3E%3Ccircle cx='420' cy='155' r='1.3'/%3E%3Ccircle cx='490' cy='190' r='1.3'/%3E%3Ccircle cx='680' cy='215' r='1.3'/%3E%3Ccircle cx='760' cy='285' r='1.3'/%3E%3Ccircle cx='840' cy='250' r='1.3'/%3E%3Ccircle cx='120' cy='475' r='1.3'/%3E%3Ccircle cx='200' cy='520' r='1.3'/%3E%3Ccircle cx='270' cy='445' r='1.3'/%3E%3Ccircle cx='350' cy='480' r='1.3'/%3E%3Ccircle cx='510' cy='475' r='1.3'/%3E%3Ccircle cx='595' cy='510' r='1.3'/%3E%3Ccircle cx='670' cy='445' r='1.3'/%3E%3C/g%3E%3C/svg%3E");
+    background-size: 100% 100% !important;
+    animation: helicalSlowDrift2 18s ease-in-out infinite !important;
 }
 </style>
-
-<div id="ep-bg" style="position:fixed;top:0;left:0;width:100vw;height:100vh;
-     pointer-events:none;z-index:0;overflow:hidden;">
-
-  <!-- Blue tones -->
-  <div class="ep-p" style="--ep-x:4%;  --ep-sz:5px; --ep-c:rgba(99,179,237,0.65);  --ep-dur:26s; --ep-del:-2s;  --ep-sw:10s; --ep-blur:0.5px;"></div>
-  <div class="ep-p" style="--ep-x:11%; --ep-sz:8px; --ep-c:rgba(76,155,232,0.55);  --ep-dur:31s; --ep-del:-8s;  --ep-sw:14s; --ep-blur:1px;"></div>
-  <div class="ep-p" style="--ep-x:18%; --ep-sz:4px; --ep-c:rgba(99,179,237,0.7);   --ep-dur:22s; --ep-del:-15s; --ep-sw:9s;  --ep-blur:0px;"></div>
-  <div class="ep-p" style="--ep-x:25%; --ep-sz:10px;--ep-c:rgba(56,128,255,0.4);   --ep-dur:35s; --ep-del:-4s;  --ep-sw:16s; --ep-blur:1.5px;"></div>
-  <div class="ep-p" style="--ep-x:33%; --ep-sz:5px; --ep-c:rgba(99,179,237,0.6);   --ep-dur:20s; --ep-del:-20s; --ep-sw:11s; --ep-blur:0.5px;"></div>
-  <div class="ep-p" style="--ep-x:40%; --ep-sz:7px; --ep-c:rgba(76,155,232,0.5);   --ep-dur:28s; --ep-del:-11s; --ep-sw:13s; --ep-blur:1px;"></div>
-  <div class="ep-p" style="--ep-x:47%; --ep-sz:4px; --ep-c:rgba(99,179,237,0.75);  --ep-dur:19s; --ep-del:-6s;  --ep-sw:8s;  --ep-blur:0px;"></div>
-  <div class="ep-p" style="--ep-x:54%; --ep-sz:9px; --ep-c:rgba(56,128,255,0.45);  --ep-dur:33s; --ep-del:-18s; --ep-sw:15s; --ep-blur:1.5px;"></div>
-  <div class="ep-p" style="--ep-x:61%; --ep-sz:5px; --ep-c:rgba(99,179,237,0.65);  --ep-dur:24s; --ep-del:-3s;  --ep-sw:10s; --ep-blur:0.5px;"></div>
-  <div class="ep-p" style="--ep-x:68%; --ep-sz:6px; --ep-c:rgba(76,155,232,0.55);  --ep-dur:29s; --ep-del:-13s; --ep-sw:12s; --ep-blur:0.5px;"></div>
-  <div class="ep-p" style="--ep-x:74%; --ep-sz:4px; --ep-c:rgba(99,179,237,0.7);   --ep-dur:21s; --ep-del:-22s; --ep-sw:9s;  --ep-blur:0px;"></div>
-  <div class="ep-p" style="--ep-x:81%; --ep-sz:8px; --ep-c:rgba(56,128,255,0.4);   --ep-dur:36s; --ep-del:-7s;  --ep-sw:17s; --ep-blur:1px;"></div>
-  <div class="ep-p" style="--ep-x:88%; --ep-sz:5px; --ep-c:rgba(99,179,237,0.65);  --ep-dur:23s; --ep-del:-16s; --ep-sw:11s; --ep-blur:0.5px;"></div>
-  <div class="ep-p" style="--ep-x:94%; --ep-sz:7px; --ep-c:rgba(76,155,232,0.5);   --ep-dur:27s; --ep-del:-9s;  --ep-sw:13s; --ep-blur:1px;"></div>
-
-  <!-- Purple / violet tones -->
-  <div class="ep-p" style="--ep-x:8%;  --ep-sz:6px; --ep-c:rgba(183,148,244,0.55); --ep-dur:30s; --ep-del:-25s; --ep-sw:14s; --ep-blur:0.5px;"></div>
-  <div class="ep-p" style="--ep-x:22%; --ep-sz:4px; --ep-c:rgba(167,139,250,0.65); --ep-dur:18s; --ep-del:-10s; --ep-sw:8s;  --ep-blur:0px;"></div>
-  <div class="ep-p" style="--ep-x:36%; --ep-sz:9px; --ep-c:rgba(183,148,244,0.4);  --ep-dur:34s; --ep-del:-1s;  --ep-sw:16s; --ep-blur:1.5px;"></div>
-  <div class="ep-p" style="--ep-x:51%; --ep-sz:5px; --ep-c:rgba(167,139,250,0.6);  --ep-dur:25s; --ep-del:-19s; --ep-sw:11s; --ep-blur:0.5px;"></div>
-  <div class="ep-p" style="--ep-x:65%; --ep-sz:7px; --ep-c:rgba(183,148,244,0.5);  --ep-dur:32s; --ep-del:-14s; --ep-sw:13s; --ep-blur:1px;"></div>
-  <div class="ep-p" style="--ep-x:79%; --ep-sz:4px; --ep-c:rgba(167,139,250,0.7);  --ep-dur:20s; --ep-del:-28s; --ep-sw:9s;  --ep-blur:0px;"></div>
-  <div class="ep-p" style="--ep-x:92%; --ep-sz:8px; --ep-c:rgba(183,148,244,0.45); --ep-dur:37s; --ep-del:-5s;  --ep-sw:15s; --ep-blur:1.5px;"></div>
-
-  <!-- Teal / cyan tones -->
-  <div class="ep-p" style="--ep-x:15%; --ep-sz:5px; --ep-c:rgba(79,209,197,0.5);   --ep-dur:28s; --ep-del:-17s; --ep-sw:12s; --ep-blur:0.5px;"></div>
-  <div class="ep-p" style="--ep-x:29%; --ep-sz:7px; --ep-c:rgba(56,178,172,0.45);  --ep-dur:23s; --ep-del:-23s; --ep-sw:10s; --ep-blur:1px;"></div>
-  <div class="ep-p" style="--ep-x:43%; --ep-sz:4px; --ep-c:rgba(79,209,197,0.65);  --ep-dur:19s; --ep-del:-12s; --ep-sw:8s;  --ep-blur:0px;"></div>
-  <div class="ep-p" style="--ep-x:57%; --ep-sz:10px;--ep-c:rgba(56,178,172,0.35);  --ep-dur:38s; --ep-del:-0s;  --ep-sw:18s; --ep-blur:2px;"></div>
-  <div class="ep-p" style="--ep-x:71%; --ep-sz:5px; --ep-c:rgba(79,209,197,0.55);  --ep-dur:25s; --ep-del:-21s; --ep-sw:11s; --ep-blur:0.5px;"></div>
-  <div class="ep-p" style="--ep-x:85%; --ep-sz:6px; --ep-c:rgba(56,178,172,0.5);   --ep-dur:31s; --ep-del:-26s; --ep-sw:13s; --ep-blur:0.5px;"></div>
-  <div class="ep-p" style="--ep-x:97%; --ep-sz:4px; --ep-c:rgba(79,209,197,0.7);   --ep-dur:17s; --ep-del:-30s; --ep-sw:7s;  --ep-blur:0px;"></div>
-
-</div>
 """, unsafe_allow_html=True)
 
 
