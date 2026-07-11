@@ -429,6 +429,92 @@ components.html("""
 </script>
 """, height=0)
 
+
+# ---------------------------------------------------------------------------
+# Background particle animation — pure CSS, no JS, no iframe restrictions
+# ---------------------------------------------------------------------------
+st.markdown("""
+<style>
+/* ── Floating particle keyframes ───────────────────────────── */
+@keyframes ep-rise {
+    0%   { transform: translateY(105vh) scale(0.4) rotate(0deg); opacity: 0; }
+    8%   { opacity: 1; }
+    92%  { opacity: 0.75; }
+    100% { transform: translateY(-12vh) scale(1) rotate(45deg); opacity: 0; }
+}
+@keyframes ep-sway {
+    0%   { margin-left: 0px; }
+    20%  { margin-left: 40px; }
+    40%  { margin-left: -25px; }
+    60%  { margin-left: 55px; }
+    80%  { margin-left: -35px; }
+    100% { margin-left: 0px; }
+}
+@keyframes ep-pulse-orb {
+    0%,100% { box-shadow: 0 0 6px 2px var(--ep-c); opacity: 0.55; }
+    50%      { box-shadow: 0 0 18px 6px var(--ep-c); opacity: 0.95; }
+}
+
+/* ── Base particle style ────────────────────────────────────── */
+.ep-p {
+    position: fixed;
+    bottom: -60px;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 0;
+    animation:
+        ep-rise  var(--ep-dur,  24s) var(--ep-del,  0s) linear    infinite,
+        ep-sway  var(--ep-sw,   12s) var(--ep-del,  0s) ease-in-out infinite,
+        ep-pulse-orb 3s              var(--ep-del,  0s) ease-in-out infinite;
+    width:  var(--ep-sz, 6px);
+    height: var(--ep-sz, 6px);
+    left:   var(--ep-x,  50%);
+    background: var(--ep-c, rgba(99,179,237,0.7));
+    filter: blur(var(--ep-blur, 0.5px));
+}
+</style>
+
+<div id="ep-bg" style="position:fixed;top:0;left:0;width:100vw;height:100vh;
+     pointer-events:none;z-index:0;overflow:hidden;">
+
+  <!-- Blue tones -->
+  <div class="ep-p" style="--ep-x:4%;  --ep-sz:5px; --ep-c:rgba(99,179,237,0.65);  --ep-dur:26s; --ep-del:-2s;  --ep-sw:10s; --ep-blur:0.5px;"></div>
+  <div class="ep-p" style="--ep-x:11%; --ep-sz:8px; --ep-c:rgba(76,155,232,0.55);  --ep-dur:31s; --ep-del:-8s;  --ep-sw:14s; --ep-blur:1px;"></div>
+  <div class="ep-p" style="--ep-x:18%; --ep-sz:4px; --ep-c:rgba(99,179,237,0.7);   --ep-dur:22s; --ep-del:-15s; --ep-sw:9s;  --ep-blur:0px;"></div>
+  <div class="ep-p" style="--ep-x:25%; --ep-sz:10px;--ep-c:rgba(56,128,255,0.4);   --ep-dur:35s; --ep-del:-4s;  --ep-sw:16s; --ep-blur:1.5px;"></div>
+  <div class="ep-p" style="--ep-x:33%; --ep-sz:5px; --ep-c:rgba(99,179,237,0.6);   --ep-dur:20s; --ep-del:-20s; --ep-sw:11s; --ep-blur:0.5px;"></div>
+  <div class="ep-p" style="--ep-x:40%; --ep-sz:7px; --ep-c:rgba(76,155,232,0.5);   --ep-dur:28s; --ep-del:-11s; --ep-sw:13s; --ep-blur:1px;"></div>
+  <div class="ep-p" style="--ep-x:47%; --ep-sz:4px; --ep-c:rgba(99,179,237,0.75);  --ep-dur:19s; --ep-del:-6s;  --ep-sw:8s;  --ep-blur:0px;"></div>
+  <div class="ep-p" style="--ep-x:54%; --ep-sz:9px; --ep-c:rgba(56,128,255,0.45);  --ep-dur:33s; --ep-del:-18s; --ep-sw:15s; --ep-blur:1.5px;"></div>
+  <div class="ep-p" style="--ep-x:61%; --ep-sz:5px; --ep-c:rgba(99,179,237,0.65);  --ep-dur:24s; --ep-del:-3s;  --ep-sw:10s; --ep-blur:0.5px;"></div>
+  <div class="ep-p" style="--ep-x:68%; --ep-sz:6px; --ep-c:rgba(76,155,232,0.55);  --ep-dur:29s; --ep-del:-13s; --ep-sw:12s; --ep-blur:0.5px;"></div>
+  <div class="ep-p" style="--ep-x:74%; --ep-sz:4px; --ep-c:rgba(99,179,237,0.7);   --ep-dur:21s; --ep-del:-22s; --ep-sw:9s;  --ep-blur:0px;"></div>
+  <div class="ep-p" style="--ep-x:81%; --ep-sz:8px; --ep-c:rgba(56,128,255,0.4);   --ep-dur:36s; --ep-del:-7s;  --ep-sw:17s; --ep-blur:1px;"></div>
+  <div class="ep-p" style="--ep-x:88%; --ep-sz:5px; --ep-c:rgba(99,179,237,0.65);  --ep-dur:23s; --ep-del:-16s; --ep-sw:11s; --ep-blur:0.5px;"></div>
+  <div class="ep-p" style="--ep-x:94%; --ep-sz:7px; --ep-c:rgba(76,155,232,0.5);   --ep-dur:27s; --ep-del:-9s;  --ep-sw:13s; --ep-blur:1px;"></div>
+
+  <!-- Purple / violet tones -->
+  <div class="ep-p" style="--ep-x:8%;  --ep-sz:6px; --ep-c:rgba(183,148,244,0.55); --ep-dur:30s; --ep-del:-25s; --ep-sw:14s; --ep-blur:0.5px;"></div>
+  <div class="ep-p" style="--ep-x:22%; --ep-sz:4px; --ep-c:rgba(167,139,250,0.65); --ep-dur:18s; --ep-del:-10s; --ep-sw:8s;  --ep-blur:0px;"></div>
+  <div class="ep-p" style="--ep-x:36%; --ep-sz:9px; --ep-c:rgba(183,148,244,0.4);  --ep-dur:34s; --ep-del:-1s;  --ep-sw:16s; --ep-blur:1.5px;"></div>
+  <div class="ep-p" style="--ep-x:51%; --ep-sz:5px; --ep-c:rgba(167,139,250,0.6);  --ep-dur:25s; --ep-del:-19s; --ep-sw:11s; --ep-blur:0.5px;"></div>
+  <div class="ep-p" style="--ep-x:65%; --ep-sz:7px; --ep-c:rgba(183,148,244,0.5);  --ep-dur:32s; --ep-del:-14s; --ep-sw:13s; --ep-blur:1px;"></div>
+  <div class="ep-p" style="--ep-x:79%; --ep-sz:4px; --ep-c:rgba(167,139,250,0.7);  --ep-dur:20s; --ep-del:-28s; --ep-sw:9s;  --ep-blur:0px;"></div>
+  <div class="ep-p" style="--ep-x:92%; --ep-sz:8px; --ep-c:rgba(183,148,244,0.45); --ep-dur:37s; --ep-del:-5s;  --ep-sw:15s; --ep-blur:1.5px;"></div>
+
+  <!-- Teal / cyan tones -->
+  <div class="ep-p" style="--ep-x:15%; --ep-sz:5px; --ep-c:rgba(79,209,197,0.5);   --ep-dur:28s; --ep-del:-17s; --ep-sw:12s; --ep-blur:0.5px;"></div>
+  <div class="ep-p" style="--ep-x:29%; --ep-sz:7px; --ep-c:rgba(56,178,172,0.45);  --ep-dur:23s; --ep-del:-23s; --ep-sw:10s; --ep-blur:1px;"></div>
+  <div class="ep-p" style="--ep-x:43%; --ep-sz:4px; --ep-c:rgba(79,209,197,0.65);  --ep-dur:19s; --ep-del:-12s; --ep-sw:8s;  --ep-blur:0px;"></div>
+  <div class="ep-p" style="--ep-x:57%; --ep-sz:10px;--ep-c:rgba(56,178,172,0.35);  --ep-dur:38s; --ep-del:-0s;  --ep-sw:18s; --ep-blur:2px;"></div>
+  <div class="ep-p" style="--ep-x:71%; --ep-sz:5px; --ep-c:rgba(79,209,197,0.55);  --ep-dur:25s; --ep-del:-21s; --ep-sw:11s; --ep-blur:0.5px;"></div>
+  <div class="ep-p" style="--ep-x:85%; --ep-sz:6px; --ep-c:rgba(56,178,172,0.5);   --ep-dur:31s; --ep-del:-26s; --ep-sw:13s; --ep-blur:0.5px;"></div>
+  <div class="ep-p" style="--ep-x:97%; --ep-sz:4px; --ep-c:rgba(79,209,197,0.7);   --ep-dur:17s; --ep-del:-30s; --ep-sw:7s;  --ep-blur:0px;"></div>
+
+</div>
+""", unsafe_allow_html=True)
+
+
 # ---------------------------------------------------------------------------
 # Scenario presets
 # ---------------------------------------------------------------------------
