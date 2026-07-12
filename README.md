@@ -1,145 +1,236 @@
-# EpiSim — Disease Spread Simulation Platform
+<div align="center">
 
-**EpiSim** is an academic-grade, interactive epidemic simulation platform built with Python and Streamlit. It implements compartmental mathematical models (SEIRD, SEIR, SIR, SIS) to simulate how infectious diseases spread through a population — and how public health interventions change that trajectory.
+<br/>
 
-The platform is designed for students, researchers, and educators who want to explore epidemic dynamics, calibrate models to real outbreak data, and produce publication-quality visualisations — all without writing a single line of code.
+# 🦠 EpiSim
+
+### *Academic-Grade Epidemic Simulation Platform*
+
+<br/>
+
+[![Live Demo](https://img.shields.io/badge/▶%20Live%20Demo-disease--spread--simulation.streamlit.app-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)](https://disease-spread-simulation.streamlit.app/)
+&nbsp;
+[![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
+&nbsp;
+[![Streamlit](https://img.shields.io/badge/Streamlit-1.35%2B-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)](https://streamlit.io/)
+&nbsp;
+[![License](https://img.shields.io/badge/License-MIT-22C55E?style=for-the-badge)](LICENSE)
+
+<br/>
+
+> *"The goal of mathematical epidemiology is not merely to describe, but to illuminate — to reveal the hidden architecture of an epidemic before it reveals itself."*
+
+<br/>
 
 ---
 
-## What the Platform Does
+</div>
 
-EpiSim solves a system of Ordinary Differential Equations (ODEs) that describe how individuals move between health states over time. Given a set of epidemiological parameters, it simulates the entire course of an outbreak — from the first infected individual to the final attack rate — and presents the results through a fully interactive dashboard.
+## Overview
 
-### Supported Epidemic Models
+**EpiSim** is an interactive, mathematically rigorous epidemic simulation platform built on compartmental ODE models. It bridges the gap between abstract epidemiological theory and intuitive, real-time exploration — empowering students, researchers, and public health analysts to model outbreak dynamics, calibrate against real-world data, and quantify the impact of interventions — all within a single, beautifully designed dashboard.
 
-| Model | Compartments | Best Used For |
-|-------|-------------|---------------|
-| **SEIRD** | S → E → I → R / D | COVID-19, Ebola — full dynamics with incubation and mortality |
-| **SEIR** | S → E → I → R | Influenza — incubation period, no explicit mortality tracking |
-| **SIR** | S → I → R | Simple outbreaks — Kermack–McKendrick classical model |
-| **SIS** | S → I → S | Bacterial infections — no permanent immunity, endemic dynamics |
+<br/>
 
-### Mathematical Basis (SEIRD)
+<div align="center">
+
+### [→ Launch the Live Platform](https://disease-spread-simulation.streamlit.app/)
+
+*No installation. No setup. Open in any browser.*
+
+</div>
+
+<br/>
+
+---
+
+## Supported Epidemic Models
+
+EpiSim implements four classical compartmental frameworks, each solving a coupled system of Ordinary Differential Equations in real time:
+
+| Model | Compartments | Optimal Application |
+|:-----:|:------------:|:-------------------|
+| **SEIRD** | S → E → I → R / D | COVID-19, Ebola — full dynamics with incubation and explicit mortality |
+| **SEIR** | S → E → I → R | Influenza — incubation period without direct mortality tracking |
+| **SIR** | S → I → R | Classical Kermack–McKendrick outbreaks with permanent immunity |
+| **SIS** | S → I → S | Bacterial infections — no lasting immunity, endemic equilibrium |
+
+<br/>
+
+---
+
+## Mathematical Foundation
+
+The SEIRD model governs population flow through five mutually exclusive health states:
 
 $$\frac{dS}{dt} = -\beta \frac{SI}{N} \qquad \frac{dE}{dt} = \beta \frac{SI}{N} - \sigma E$$
 
 $$\frac{dI}{dt} = \sigma E - (\gamma + \mu)I \qquad \frac{dR}{dt} = \gamma I \qquad \frac{dD}{dt} = \mu I$$
 
-Where **β** is transmission rate, **σ** is incubation rate, **γ** is recovery rate, **μ** is case fatality rate, and **N** is the total population.
+| Symbol | Parameter | Interpretation |
+|:------:|:---------:|:--------------|
+| **β** | Transmission rate | Effective contacts × probability of transmission per contact per day |
+| **σ** | Incubation rate | Reciprocal of the mean latent period (days⁻¹) |
+| **γ** | Recovery rate | Reciprocal of the mean infectious period (days⁻¹) |
+| **μ** | Case fatality rate | Fraction of infectious-days terminating in death |
+| **N** | Total population | Assumed closed, homogeneously mixing population |
+
+<br/>
 
 ---
 
-## How a User Works With EpiSim
+## Platform Capabilities
 
-### Step 1 — Choose a Model and Set Parameters
-
-Open the **Simulation Controls** panel on the left side of the dashboard. Select an epidemic model architecture (SEIRD, SEIR, SIR, or SIS) and choose from built-in disease presets (COVID-19, Influenza, Ebola, Measles, SARS) or set parameters manually:
-
-- **Population size (N)** — total people in the simulated community
-- **Initial infected (I₀)** — number of infections at day 0
-- **Transmission rate (β)** — how quickly the disease spreads between contacts
-- **Incubation rate (σ)** — reciprocal of the mean incubation period in days
-- **Recovery rate (γ)** — reciprocal of the mean infectious period in days
-- **Case fatality rate (μ)** — fraction of infectious days ending in death
-- **Vaccination coverage** — fraction immunised before the outbreak begins
-- **Social distancing** — fractional reduction in effective transmission
-- **Hospitalisation rate & ICU bed capacity** — for healthcare demand analysis
-
-Every change instantly re-runs the simulation and updates all charts and metrics.
-
-### Step 2 — Read the Simulation Dashboard (📈 Simulation Tab)
-
-The main chart shows the full epidemic curve — an animated, day-by-day progression of all compartments (Susceptible, Exposed, Infectious, Recovered, Deaths). The animation can be played, paused, or scrubbed with a day slider.
-
-Six academic metric cards display the most important summary statistics:
+### 📈 Simulation Dashboard
+Animated, day-by-day epidemic curve with a scrubable timeline slider. Six academic metric cards update instantaneously with every parameter change:
 
 | Metric | Description |
-|--------|-------------|
-| **R₀** | Basic reproduction number — average secondary cases per infection |
-| **Peak Active Infections** | Maximum simultaneously infectious individuals |
-| **Peak Hospitalisations** | Peak hospital bed demand vs. ICU capacity |
-| **Total Deaths** | Cumulative mortality with Case Fatality Ratio |
-| **Herd Immunity Threshold** | Fraction of population that must be immune to stop spread (1 − 1/R₀) |
-| **Doubling Time** | Initial exponential growth doubling time in days |
+|:-------|:-----------|
+| **R₀** | Basic reproduction number — mean secondary infections per primary case |
+| **Peak Active Infections** | Maximum simultaneous infectious burden |
+| **Peak Hospitalisations** | Hospital demand relative to configured ICU capacity |
+| **Total Deaths** | Cumulative mortality and Case Fatality Ratio |
+| **Herd Immunity Threshold** | Critical immunisation fraction: 1 − 1/R₀ |
+| **Doubling Time** | Characteristic exponential growth timescale (days) |
 
-### Step 3 — Explore Advanced Analysis (🔬 Analysis Tab)
+<br/>
 
-Four specialised scientific charts deepen the understanding of the epidemic:
+### 🔬 Advanced Epidemiological Analysis
+Four publication-quality scientific visualisations:
 
-- **Daily New Cases (Incidence Curve)** — bar chart of dI/dt per day, the standard epidemiological "wave" chart. Coloured bars highlight when daily cases exceed the 80th percentile.
+- **Incidence Curve** — Daily new cases (dI/dt), with surge-period highlighting above the 80th percentile
+- **Effective Reproduction Number Rₜ(t)** — Time-varying transmission dynamics; green threshold at Rₜ = 1.0 marks epidemic control
+- **Phase-Plane Portrait (S–I Trajectory)** — State-space trajectory spiraling from high-S/low-I toward endemic equilibrium; isocline at S = N/R₀ marks the epidemic peak
+- **Sensitivity / Tornado Analysis** — ±20% parameter sweep revealing which variables most critically govern peak infection magnitude
 
-- **Time-Varying Effective Reproduction Number Rt(t)** — shows how Rt falls from R₀ as the susceptible population depletes. A green dashed line at Rt = 1.0 marks the point of epidemic control. When Rt drops below 1, the epidemic enters exponential decline.
+<br/>
 
-- **Phase Plane Portrait (S–I Trajectory)** — the classic mathematical epidemiology analysis tool. Plots the state-space trajectory of susceptibles vs. infectious individuals over time. The epidemic spirals from high-S/low-I toward the equilibrium. The vertical isocline where dI/dt = 0 (S = N/R₀) marks the exact epidemic peak.
+### ⚖️ Scenario Comparison
+Side-by-side overlay of a no-intervention baseline against the current policy scenario:
+- *"Flatten the curve"* composite chart with ICU threshold marker
+- Rₜ(t) comparative trajectories
+- Headline impact summary: **lives saved** and **peak infections averted**
+- Full metric breakdown table with absolute and relative change columns
 
-- **Sensitivity / Tornado Analysis** — sweeps each parameter (β, σ, γ, μ, N, I₀) by ±20% and shows the resulting change in peak infections as a horizontal bar chart. The longest bars reveal which parameters have the greatest influence on the epidemic — the critical targets for intervention.
+<br/>
 
-### Step 4 — Compare Scenarios (⚖️ Comparison Tab)
+### 📂 Real-World Data Fitting
+Upload any outbreak CSV (WHO situation reports, national case counts) and EpiSim will:
+1. Preview and map your columns (Day, Active Cases, Deaths)
+2. **Auto-fit** — L-BFGS-B least-squares optimisation returning calibrated β, σ, γ, μ with fitted R₀, RMSE, R², and a residuals chart
+3. **Manual overlay** — Interactive slider fitting with live R² feedback against observed data
 
-Without changing the left panel, navigate to the Comparison tab. The platform automatically runs a **baseline scenario** (no vaccination, no distancing) alongside the current intervention scenario and displays:
+<br/>
 
-- **Overlay "flatten the curve" chart** — baseline (dashed red) vs. intervention (solid green) infectious curves on a single chart, with the ICU threshold shown
-- **Rt(t) comparison** — side-by-side reproduction number trajectories showing how quickly the intervention brings Rt below 1
-- **Impact headline** — lives saved and peak infections averted
-- **Detailed breakdown table** — side-by-side comparison of all key metrics with change column
+### 📋 Data Export
+Download analysis-ready CSV files for academic appendices:
+- **Time-series export** — S, E, I, R, D, hospitalisations, daily incidence, and Rₜ(t)
+- **Scenario summary** — All configured parameters and derived epidemiological metrics
 
-### Step 5 — Upload Real Data and Fit Parameters (📂 Dataset Upload Tab)
-
-Upload any CSV file containing real epidemic outbreak data (e.g. WHO situation reports, national case counts) and the platform will:
-
-1. **Preview the data** and let you map columns (Day, Active Cases, Deaths)
-2. Offer two analysis modes:
-   - **Auto-fit mode** — runs L-BFGS-B least-squares optimisation to find the β, σ, γ, μ values that best reproduce the real data. Reports fitted R₀, RMSE, R², and a residuals chart.
-   - **Manual overlay mode** — lets you adjust parameters with sliders and instantly compare your simulated curve against the real observations, with live R² feedback.
-3. Output the fitted parameter values as a copyable string that can be entered into the Simulation Controls to run the full dashboard using real-data-calibrated parameters.
-
-### Step 6 — Export Results (📋 Data & Export Tab)
-
-Download two CSV files for your report appendix:
-
-- **Time-series CSV** — daily values for S, E, I, R, D, hospitalisation estimates, daily new cases (incidence), and time-varying Rt(t)
-- **Scenario summary CSV** — all parameters and key epidemiological metrics in tabular form
+<br/>
 
 ---
 
-## How Users Benefit
+## Who It's For
 
-### For Students
-EpiSim removes the mathematical barrier to epidemic modelling. A student can explore how changing a single parameter (e.g. doubling vaccination coverage) affects the peak, the deaths, and the herd immunity threshold — in real time, without writing code. The built-in insight annotations explain what each chart means, making the platform self-teaching.
+<table>
+<tr>
+<td width="50%" valign="top">
 
-### For Researchers
-The parameter fitting capability allows researchers to calibrate a compartmental model to real outbreak data from any disease or region. The sensitivity tornado chart immediately identifies which parameters carry the most uncertainty — guiding where further data collection is most valuable.
+**🎓 Students**
 
-### For Educators
-The animated epidemic curve, phase-plane portrait, and Rt(t) chart are lecture-quality visualisations of core epidemiological concepts. Students can experiment interactively while the educator explains the underlying mathematics shown in the sidebar equation panel.
+Explore how a single parameter shift — doubling vaccination coverage, halving contact rates — propagates through the entire epidemic curve. Built-in chart annotations make the platform self-teaching, removing the mathematical barrier to epidemic modelling.
 
-### For Public Health Analysis
-The comparison tab directly answers the key policy question: *"What is the measurable impact of this intervention?"* Lives saved, infections averted, ICU pressure, and the shift in epidemic peak day are all quantified automatically.
+</td>
+<td width="50%" valign="top">
+
+**🔭 Researchers**
+
+Calibrate compartmental models to real outbreak data from any disease or region. The sensitivity tornado chart immediately surfaces which parameters carry the highest epistemic uncertainty — pinpointing where further data collection yields the greatest analytical value.
+
+</td>
+</tr>
+<tr>
+<td width="50%" valign="top">
+
+**📚 Educators**
+
+Animated epidemic curves, phase-plane portraits, and Rₜ(t) trajectories are lecture-ready visualisations of core epidemiological concepts. Students experiment interactively while the instructor narrates the underlying mathematics from the sidebar equation panel.
+
+</td>
+<td width="50%" valign="top">
+
+**🏥 Public Health Analysts**
+
+The Comparison tab directly answers the policy question: *"What is the quantified impact of this intervention?"* Lives saved, infections averted, ICU headroom, and peak-day shift — all computed automatically.
+
+</td>
+</tr>
+</table>
+
+<br/>
 
 ---
 
-## How to Run
-
-### 1. Create and activate a virtual environment
+## Running Locally
 
 ```powershell
+# 1. Clone the repository
+git clone https://github.com/pronad1/Disease-Spread-Simulation.git
+cd Disease-Spread-Simulation
+
+# 2. Create and activate a virtual environment
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1
-```
 
-### 2. Run the dashboard
+# 3. Install dependencies
+pip install -r requirements.txt
 
-```powershell
+# 4. Launch the dashboard
 .\run.bat
 ```
 
 The dashboard opens automatically at `http://localhost:8501`.
 
+> **Alternatively**, access the fully hosted platform instantly at **[disease-spread-simulation.streamlit.app](https://disease-spread-simulation.streamlit.app/)** — no local setup required.
+
+<br/>
+
+---
+
+## Tech Stack
+
+| Layer | Technology |
+|:------|:----------|
+| **Frontend / Dashboard** | [Streamlit](https://streamlit.io/) |
+| **Scientific Computing** | [NumPy](https://numpy.org/), [SciPy](https://scipy.org/) (ODE integration, L-BFGS-B optimisation) |
+| **Data Processing** | [Pandas](https://pandas.pydata.org/) |
+| **Visualisation** | [Plotly](https://plotly.com/python/) (animated figures, phase portraits) |
+| **Deployment** | [Streamlit Community Cloud](https://streamlit.io/cloud) |
+
+<br/>
+
 ---
 
 ## References
 
-- Kermack, W.O. & McKendrick, A.G. (1927). *A contribution to the mathematical theory of epidemics.* Proceedings of the Royal Society A.
+- Kermack, W.O. & McKendrick, A.G. (1927). *A contribution to the mathematical theory of epidemics.* **Proceedings of the Royal Society A**, 115(772), 700–721.
 - Anderson, R.M. & May, R.M. (1991). *Infectious Diseases of Humans: Dynamics and Control.* Oxford University Press.
-- Heesterbeek, H. et al. (2015). Modeling infectious disease dynamics in the complex landscape of global health. *Science*, 347(6227).
-- World Health Organization. (2020). *COVID-19 Technical Guidance.* WHO.
+- Heesterbeek, H. et al. (2015). Modeling infectious disease dynamics in the complex landscape of global health. ***Science***, 347(6227), aaa4339.
+- World Health Organization. (2020). *COVID-19 Technical Guidance.* WHO Press.
+
+<br/>
+
+---
+
+<div align="center">
+
+Built with precision for the epidemiological community.
+
+**[→ Experience EpiSim Live](https://disease-spread-simulation.streamlit.app/)**
+
+<br/>
+
+*© 2025 EpiSim — Open Source under the MIT License*
+
+</div>
