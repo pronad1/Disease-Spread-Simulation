@@ -229,7 +229,6 @@ Built with precision for the epidemiological community.
 
 **[→ Experience EpiSim Live](https://disease-spread-simulation.streamlit.app/)**
 
-
 <br/>
 
 *© 2025 EpiSim — Open Source under the MIT License*
